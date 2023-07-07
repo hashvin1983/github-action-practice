@@ -1,13 +1,24 @@
 name: Action Workflow
 
 on: 
-  repository_dispatch:
-    types: [build]
+  push:
+    branches:
+      - main
+      - "feature/*" # matches feature/feat doesn't match feature/feat/fg
+      - "feature/**" # matches anything
+      - "!feature/featc"
+    tags:
+      - v1.*
+    paths:
+      - "**.js"
+      - "!filename.js"
+  #repository_dispatch:
+  #  types: [build]
   #schedule:
   #  - cron: "0/5 * * * *"
   #push:
-  pull_request:
-    types: [closed, assigned, opened, reopened]
+  #pull_request:
+  #  types: [closed, assigned, opened, reopened]
 
 
 jobs:
